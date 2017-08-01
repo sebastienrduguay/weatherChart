@@ -17,9 +17,9 @@ class WeatherSearchForm extends Component {
 
   searchRequested() {
     const { city, country } = this.props;
-    console.log('searchRequested: ', city, ', ', country);
     this.props.fetchForcast({ city, country });
   }
+
   renderButton() {
       if (this.props.loading) {
         return <Spinner size='large' />;

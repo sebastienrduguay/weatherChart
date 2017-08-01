@@ -27,10 +27,10 @@ export const fetchForcast = ({ city, country }) => {
   const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast?q=';
   return (dispatch) => {
     dispatch({ type: FETCH_FORECAST });
-    console.log(`${BASE_URL}${city},${country}&APPID=${API_KEY}&name=weatherApp`);
     axios.get(`${BASE_URL}${city},${country}&APPID=${API_KEY}&name=weatherApp`)
     .then((response) => {
-      fetchForcastSuccess(dispatch)
+      console.log(response);
+      fetchForcastSuccess(dispatch);
       Actions.weatherShow({ data: response.data });
     })
     .catch(() => fetchForecastFailed(dispatch));

@@ -46,6 +46,7 @@ const LineChart = ({ data = [], xKey='x', yKey='y', width = 50, height = 50, tit
       />
         <VictoryPortal>
           <VictoryLine
+
             standalone={false}
             interpolation="natural"
             style={{
@@ -63,6 +64,12 @@ const LineChart = ({ data = [], xKey='x', yKey='y', width = 50, height = 50, tit
 };
 
 const styles = {
+  chartStyle: {
+    parent: {
+      borderWidth: 5,
+      borderColor: 'red'
+    }
+  },
   titleStyle: {
     fontSize: "20px",
     stroke: "white",
