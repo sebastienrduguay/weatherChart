@@ -61,27 +61,19 @@ class WeatherForecast extends Component {
   render() {
     console.log('render',this.props);
     const { chartSectionStyle, buttonSectionStyle } = styles;
-    const {
-      temperatures,
-      humidities,
-      pressures,
-      lat,
-      lon,
-      tickValues
-    } = this.props;
 
     return (
       <Card>
         <CardSection style={ chartSectionStyle }>
           <LineChart
-            data={temperatures}
+            data={this.props.temperatures}
             xKey={"time"}
             yKey={"value"}
             width={400}
             height={200}
             title={"Temperature Over Time"}
             padding={15}
-            tickValues={tickValues}
+            tickValues={this.props.tickValues}
           />
         </CardSection>
 
