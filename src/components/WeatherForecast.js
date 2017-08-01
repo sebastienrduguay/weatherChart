@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
+import {
+  temperaturesChanged,
+  humiditiesChanged,
+  pressuresChanged,
+  latChanged,
+  lonChanged,
+  tickValuesChanged
+} from '../actions/WeatherShowActions';
 import { LineChart } from './common';
 
 const data = {
@@ -10,6 +18,31 @@ import { Card, CardSection, Button } from './common';
 
 class WeatherForecast extends Component {
   componentWillMount() {
+    const { list } = data;
+    const temperatures = [];
+    const humidities = [];
+    const pressures = [];
+    const tickValues = [];
+    const interval = 3;
+    this.props.latChanged(data.city.coord.lat);
+    this.props.lonChanged(data.city.coord.lon);
+    let hours = 0;
+    counter = 1;
+    list.forEach((element) => {
+        let date = new Date(element.dt*1000);
+        temperatures.push({ time: date, value: element.main.temp-273.15 });
+        humidities.push({ time: date, value: element.main.humidity });
+        pressures.push({ time: date, value: element.main.pressure });
+        if (counter % 2 === 1) {
+          tickValues.push(date);
+        }
+        hours += 3;
+        ++counter;
+    });
+    this.props.temperaturesChanged(temperatures);
+    this.props.humiditiesChanged(humidities);
+    this.props.pressuresChanged(pressures);
+    this.props.tickValuesChanged(tickValues);
 
   }
 
@@ -26,26 +59,16 @@ class WeatherForecast extends Component {
   }
 
   render() {
-    const { list } = data;
+    console.log('render',this.props);
     const { chartSectionStyle, buttonSectionStyle } = styles;
-    const temperatures = [];
-    const humidities = [];
-    const pressures = [];
-    const tickValues = [];
-    const interval = 3;
-    let hours = 0;
-    counter = 1;
-    list.forEach((element) => {
-        let date = new Date(element.dt*1000);
-        temperatures.push({ time: date, value: element.main.temp-273.15 });
-        humidities.push({ time: date, value: element.main.humidity });
-        pressures.push({ time: date, value: element.main.pressure });
-        if (counter % 2 === 1) {
-          tickValues.push(date);
-        }
-        hours += 3;
-        ++counter;
-    });
+    const {
+      temperatures,
+      humidities,
+      pressures,
+      lat,
+      lon,
+      tickValues
+    } = this.props;
 
     return (
       <Card>
@@ -95,4 +118,13 @@ const styles = {
   }
 }
 
-export default WeatherForecast;
+const mapStateToProps = ({ weatherForecast }) => {
+    const { temperatures, humidities, pressures, lat, lon, tickValues } = weatherForecast;
+    return { temperatures, humidities, pressures, lat, lon, tickValues };
+};
+
+export default connect(
+  mapStateToProps, {
+  temperaturesChanged, humiditiesChanged, pressuresChanged,
+  latChanged, lonChanged, tickValuesChanged }
+)(WeatherForecast);

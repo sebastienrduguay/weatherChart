@@ -1,67 +1,50 @@
-/*import {
-  HUMIDITIES_CHANGED,
+import {
   TEMPERATURES_CHANGED,
+  HUMIDITIES_CHANGED,
   PRESSURES_CHANGED,
-  SEA_LEVELS_CHANGED,
-  GROUND_LEVELS_CHANGED,
   LAT_CHANGED,
   LON_CHANGED,
-  CHART_SELECTION_CHANGED
-} from '../actions/types';
-
-export const humiditiesChanged = (data) => {
-  return {
-    type: HUMIDITIES_CHANGED,
-    payload: data
-  };
-};
+  TICK_VALUES_CHANGED
+} from './types';
 
 export const temperaturesChanged = (data) => {
   return {
     type: TEMPERATURES_CHANGED,
-    payload: data
+    payload: { ...data }
+  };
+};
+
+export const humiditiesChanged = (data) => {
+  return {
+    type: HUMIDITIES_CHANGED,
+    payload: { ...data }
   };
 };
 
 export const pressuresChanged = (data) => {
   return {
     type: PRESSURES_CHANGED,
-    payload: data
+    payload: { ...data }
   };
 };
 
-export const seaLevelsChanged = (data) => {
+export const tickValuesChanged = (data) => {
   return {
-    type: SEA_LEVELS_CHANGED,
-    payload: data
+    type: TICK_VALUES_CHANGED,
+    payload: { ...data }
   };
 };
 
-export const groundLevelsChanged = (data) => {
-  return {
-    type: GROUND_LEVELS_CHANGED,
-    payload: data
-  };
-};
-
-export const latChanged = (value) => {
+export const latChanged = (data) => {
   return {
     type: LAT_CHANGED,
-    payload: value
+    payload: { data }
   };
 };
 
-export const lonChanged = (value) => {
+export const lonChanged = (data) => {
   return {
     type: LON_CHANGED,
-    payload: value
+    payload: { data }
   };
 };
-
-export const chartSelectionChanged = (value) => {
-  return {
-    type: CHART_SELECTION_CHANGED,
-    payload: value
-  };
-};
-*/
