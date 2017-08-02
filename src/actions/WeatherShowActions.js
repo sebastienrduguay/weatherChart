@@ -4,34 +4,35 @@ import {
   PRESSURES_CHANGED,
   LAT_CHANGED,
   LON_CHANGED,
-  TICK_VALUES_CHANGED
+  TICK_VALUES_CHANGED,
+  DATA_SELECTED_CHANGED
 } from './types';
 
 export const temperaturesChanged = (data) => {
   return {
     type: TEMPERATURES_CHANGED,
-    payload: { ...data }
+    payload: [ ...data ]
   };
 };
 
 export const humiditiesChanged = (data) => {
   return {
     type: HUMIDITIES_CHANGED,
-    payload: { ...data }
+    payload: [ ...data ]
   };
 };
 
 export const pressuresChanged = (data) => {
   return {
     type: PRESSURES_CHANGED,
-    payload: { ...data }
+    payload: [ ...data ]
   };
 };
 
 export const tickValuesChanged = (data) => {
   return {
     type: TICK_VALUES_CHANGED,
-    payload: { ...data }
+    payload: [ ...data ]
   };
 };
 
@@ -48,3 +49,10 @@ export const lonChanged = (data) => {
     payload: { data }
   };
 };
+
+export const dataSelectedChanged = (data) => {
+  return {
+    type: DATA_SELECTED_CHANGED,
+    payload: { data }
+  }
+}

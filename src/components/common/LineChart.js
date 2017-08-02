@@ -10,11 +10,9 @@ import {
 } from 'victory-native';
 
 const LineChart = ({ data = [], xKey='x', yKey='y', width = 50, height = 50, title = '',
-  domainPadding = { x: 0, y: 15 }, tickValues = [], chartPadding = {left: 30, top:30, bottom:33, right:45 },
+  domainPadding = { x: 0, y: 15 }, tickValues = [], chartPadding = {left: 35, top:30, bottom:35, right:50 },
   dependentAxisOrientation = 'left'}) => {
   const { titleStyle, axisDateStyle, axisTempStyle } = styles;
-  console.log(tickValues);
-  console.log(data);
   const startingTime = tickValues[0];
 
   let currentDate = 0;
@@ -42,11 +40,24 @@ const LineChart = ({ data = [], xKey='x', yKey='y', width = 50, height = 50, tit
         orientation={dependentAxisOrientation}
         scale="linear"
         style={axisTempStyle}
-
       />
         <VictoryPortal>
           <VictoryLine
+            animate={{
+              onEnter: {
+                duration: 500,
+                before: () => ({
+                  _y: 0
+                })
+              },
+              onExit: {
+                duration: 500,
+                before: () => ({
+                  _y: 0
+                })
+              }
 
+            }}
             standalone={false}
             interpolation="natural"
             style={{
@@ -93,9 +104,8 @@ const styles = {
 
   },
   axisTempStyle: {
-
     axis: { stroke: "white", strokeWidth: 2},
-    tickLabels: { stroke: "white", fontSize: "10px" },
+    tickLabels: { stroke: "white", fontSize: "8px" },
     grid: { stroke: "darkgrey" },
     ticks: {
       size: (tick) => {

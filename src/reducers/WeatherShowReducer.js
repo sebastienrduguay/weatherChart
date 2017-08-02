@@ -4,7 +4,8 @@ import {
   PRESSURES_CHANGED,
   LAT_CHANGED,
   LON_CHANGED,
-  TICK_VALUES_CHANGED
+  TICK_VALUES_CHANGED,
+  DATA_SELECTED_CHANGED
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -13,7 +14,8 @@ const INITIAL_STATE = {
     pressures: [],
     lat: 0,
     lon: 0,
-    tickValues: []
+    tickValues: [],
+    dataSelected: 0
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,6 +32,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, lon: action.payload };
     case TICK_VALUES_CHANGED:
       return { ...state, tickValues: action.payload };
+    case DATA_SELECTED_CHANGED:
+      return { ...state, dataSelected: action.payload };
     default:
       return state;
   }
