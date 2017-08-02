@@ -39,20 +39,20 @@ export const tickValuesChanged = (data) => {
 export const latChanged = (data) => {
   return {
     type: LAT_CHANGED,
-    payload: { data }
+    payload: data
   };
 };
 
 export const lonChanged = (data) => {
   return {
     type: LON_CHANGED,
-    payload: { data }
+    payload: data
   };
 };
 
 export const dataSelectedChanged = (data) => {
   return {
     type: DATA_SELECTED_CHANGED,
-    payload: { data }
+    payload: data
   }
 }

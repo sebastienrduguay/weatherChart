@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View, ImageBackground } from 'react-native';
+import MapView from 'react-native-maps';
 import { connect } from 'react-redux';
+import { width, height } from 'react-native-dimension';
 import {
   temperaturesChanged,
   humiditiesChanged,
@@ -11,7 +13,7 @@ import {
   dataSelectedChanged
 } from '../actions/WeatherShowActions';
 import { LineChart } from './common';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, WeatherItem } from './common';
 
 
 const DATA_TITLES = [ 'Temprerature', 'Humidity', 'Pressure' ];
@@ -20,6 +22,7 @@ const data = {
 
 class WeatherForecast extends Component {
   componentWillMount() {
+    //const { data } = this.props;
     const { list } = data;
     const temperatures = [];
     const humidities = [];
@@ -45,7 +48,6 @@ class WeatherForecast extends Component {
     this.props.humiditiesChanged(humidities);
     this.props.pressuresChanged(pressures);
     this.props.tickValuesChanged(tickValues);
-
   }
 
   onTemperatureButtonPressed = () => {
@@ -77,36 +79,61 @@ class WeatherForecast extends Component {
   }
 
   render() {
-    const { chartSectionStyle, buttonSectionStyle } = styles;
+    const { chartSectionStyle, buttonSectionStyle, mapSectionStyle } = styles;
     const { dataSelected, tickValues } = this.props;
+
     return (
-      <Card>
-        <CardSection style={ chartSectionStyle }>
+
+      <View style={{ flex: 1 }}>
+
+      <ImageBackground
+        source={require('../../assets/backgroundWeather.png')}
+        imageStyle={{ resizeMode: 'stretch'}}
+      />
+        <View style={ chartSectionStyle }>
           <LineChart
-            data={this.getSelectedData(dataSelected.data)}
+            data={this.getSelectedData(dataSelected)}
             xKey={"time"}
             yKey={"value"}
-            width={400}
+            width={width(100)}
             height={200}
-            title={DATA_TITLES[dataSelected.data]}
+            title={DATA_TITLES[dataSelected]}
             padding={15}
             tickValues={tickValues}
           />
-        </CardSection>
+        </View>
+        <View style={{ flex: 0.7 , borderColor: 'red', borderWidth: 4, justifyContent: 'center', marginTop: 10}}>
+          <WeatherItem data={data.list[0]}/>
+        </View>
+        <View style={ mapSectionStyle }>
+          <MapView
+            width={width(96)}
+            height={200}
+            provider={null}
+            mapType={"hybrid"}
+            initialRegion={{
+              latitude: this.props.lat,
+              longitude: this.props.lon,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          />
+        </View>
 
-        <CardSection style={ buttonSectionStyle } >
+        <View style={ buttonSectionStyle } >
           <Button onPress={this.onTemperatureButtonPressed.bind(this)} >
-            Temperature
+            {DATA_TITLES[0]}
           </Button>
           <Button onPress={this.onHumidityButtonPressed.bind(this)} >
-            Humidity
+            {DATA_TITLES[1]}
           </Button>
           <Button onPress={this.onPressureButtonPressed.bind(this)} >
-            pressure
+            {DATA_TITLES[2]}
           </Button>
-        </CardSection>
+        </View>
 
-      </Card>
+      </View>
+
     );
   }
 }
@@ -117,17 +144,25 @@ const colors = {
 
 const styles = {
   chartSectionStyle: {
+    flex: 1.2,
+    padding: 0,
+    marginTop: 10,
+    marginBottom: 2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonSectionStyle: {
+    flex: 0.2,
+    flexDirection: 'row',
+    marginTop: 5,
+    marginBottom: 5
+  },
+  mapSectionStyle: {
+    flex: 1.5,
     padding: 0,
     marginBottom: 2,
     alignItems: 'center',
-    backgroundColor: "black",
-    borderWidth: 2,
-    borderColor: colors.DeepRed
-  },
-  buttonSectionStyle: {
-    backgroundColor: 'black',
-    borderColor: colors.DeepRed,
-    borderWidth: 2
+    justifyContent: 'flex-end'
   }
 }
 

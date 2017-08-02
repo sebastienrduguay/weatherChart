@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
+import { Text, View, ImageBackground } from 'react-native';
 import { cityNameChanged, countryNameChanged, fetchForcast } from '../actions/WeatherSearchActions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { errorTextStyle } from '../styles';
@@ -33,32 +33,41 @@ class WeatherSearchForm extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label='City'
-            value={this.props.city}
-            placeholder='Montreal'
-            onChangeText={this.onCityNameChange.bind(this)}
+      <View style={{ height: 200, width: '100%', flexDirection: 'column', alignContent: 'flex-start', justifyContent: 'center'}}>
+        <View style={{ flex: 1, flexDirection: 'column'}}>
+          <ImageBackground
+            source={require('../../assets/backgroundWeather.png')}
+            imageStyle={{ resizeMode: 'stretch'}}
           />
-        </CardSection>
-        <CardSection>
-          <Input
-            label='Country'
-            value={this.props.country}
-            placeholder='Canada'
-            onChangeText={this.onCountryNameChange.bind(this)}
-          />
-        </CardSection>
+          <View style={{ height: 100, marginTop: 15 }}>
+            <Input
+              label='City'
+              value={this.props.city}
+              placeholder='Montreal'
+              onChangeText={this.onCityNameChange.bind(this)}
+            />
 
-        <Text style={errorTextStyle}>
-          {this.props.error}
-        </Text>
+            <Input
+              label='Country'
+              value={this.props.country}
+              placeholder='Canada'
+              onChangeText={this.onCountryNameChange.bind(this)}
+            />
+          </View>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+          <Text style={errorTextStyle}>
+            {this.props.error}
+          </Text>
+
+          <View style={{ height: 35, paddingLeft: 15, paddingRight: 15 }}>
+            <Button onPress={this.searchRequested.bind(this)}>
+              Search
+            </Button>
+          </View>
+
+
+        </View>
+      </View>
     );
   }
 }

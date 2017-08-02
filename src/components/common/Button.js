@@ -19,7 +19,8 @@ const styles = {
     fontSize: 16,
     fontWeight: '600',
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    backgroundColor: 'rgba(0,0,0,0)'
   },
   buttonStyle: {
     flex: 1,
@@ -29,7 +30,9 @@ const styles = {
     borderWidth: 1,
     borderColor: 'white',
     marginLeft: 3,
-    marginRight: 3
+    marginRight: 3,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 };
 export { Button };

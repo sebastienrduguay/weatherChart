@@ -10,12 +10,12 @@ import {
 } from 'victory-native';
 
 const LineChart = ({ data = [], xKey='x', yKey='y', width = 50, height = 50, title = '',
-  domainPadding = { x: 0, y: 15 }, tickValues = [], chartPadding = {left: 35, top:30, bottom:35, right:50 },
-  dependentAxisOrientation = 'left'}) => {
+  domainPadding = { x: 0, y: 15 }, tickValues = [], chartPadding = {left: 40, top:30, bottom:35, right:35 },
+  dependentAxisOrientation = 'left', titleColor = 'white', axisColor = 'white', tickLabelColor = 'white'}) => {
   const { titleStyle, axisDateStyle, axisTempStyle } = styles;
   const startingTime = tickValues[0];
-
   let currentDate = 0;
+
   return (
       <VictoryChart
         theme={VictoryTheme.material}
@@ -69,7 +69,13 @@ const LineChart = ({ data = [], xKey='x', yKey='y', width = 50, height = 50, tit
           />
         </VictoryPortal>
 
-        <VictoryLabel textAnchor="middle" style={titleStyle} text={title} x={width*0.5} y={height*0.07} />
+        <VictoryLabel
+          textAnchor="middle"
+          style={{ stroke: titleColor, fill: titleColor, fontSize: "20px" }}
+          text={title}
+          x={width*0.5}
+          y={height*0.07}
+        />
       </VictoryChart>
   );
 };
@@ -83,11 +89,9 @@ const styles = {
   },
   titleStyle: {
     fontSize: "20px",
-    stroke: "white",
-    fill: "white"
   },
   axisDateStyle: {
-    axis: { stroke: "white", strokeWidth: 2},
+    axis: { stroke: "white", strokeWidth: 1},
     tickLabels: { stroke: "white", fontSize: "8px" },
     grid: { stroke: "darkgrey" },
     ticks: {
@@ -98,13 +102,11 @@ const styles = {
         return 3;
       },
       stroke: "white",
-      strokeWidth: 2
-
+      strokeWidth: 1
     }
-
   },
   axisTempStyle: {
-    axis: { stroke: "white", strokeWidth: 2},
+    axis: { stroke: "white", strokeWidth: 1},
     tickLabels: { stroke: "white", fontSize: "8px" },
     grid: { stroke: "darkgrey" },
     ticks: {
@@ -112,11 +114,9 @@ const styles = {
         return 4;
       },
       stroke: "white",
-      strokeWidth: 2
+      strokeWidth: 1
     }
   }
 };
-
-
 
 export { LineChart };
