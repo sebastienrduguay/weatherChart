@@ -11,3 +11,4 @@ export const LAT_CHANGED = 'latChanged';
 export const LON_CHANGED = 'lonChanged';
 export const TICK_VALUES_CHANGED = 'tickValuesChanged';
 export const DATA_SELECTED_CHANGED = 'dataSelectedChanged';
+export const DATA_POINT_CHANGED = 'dataPointChanged';

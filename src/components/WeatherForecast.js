@@ -10,10 +10,10 @@ import {
   latChanged,
   lonChanged,
   tickValuesChanged,
-  dataSelectedChanged
+  dataSelectedChanged,
+  dataPointChanged
 } from '../actions/WeatherShowActions';
-import { LineChart } from './common';
-import { Card, CardSection, Button, WeatherItem } from './common';
+import { Card, CardSection, Button, ItemSelector, LineChart } from './common';
 
 
 const DATA_TITLES = [ 'Temprerature', 'Humidity', 'Pressure' ];
@@ -32,13 +32,13 @@ class WeatherForecast extends Component {
     this.props.latChanged(data.city.coord.lat);
     this.props.lonChanged(data.city.coord.lon);
     let hours = 0;
-    counter = 1;
+    counter = 0;
     list.forEach((element) => {
         let date = new Date(element.dt*1000);
-        temperatures.push({ time: date, value: element.main.temp-273.15 });
-        humidities.push({ time: date, value: element.main.humidity });
-        pressures.push({ time: date, value: element.main.pressure });
-        if (counter % 2 === 1) {
+        temperatures.push({ x: date, y: element.main.temp-273.15 });
+        humidities.push({ x: date, y: element.main.humidity });
+        pressures.push({ x: date, y: element.main.pressure });
+        if (counter % 4 === 0) {
           tickValues.push(date);
         }
         hours += 3;
@@ -78,9 +78,17 @@ class WeatherForecast extends Component {
     }
   }
 
+  onNextDataPoint = () => {
+    this.props.dataPointChanged(this.props.dataPointSelected + 1);
+  }
+
+  onPreviousDataPoint = () => {
+    this.props.dataPointChanged(this.props.dataPointSelected - 1);
+  }
+
   render() {
-    const { chartSectionStyle, buttonSectionStyle, mapSectionStyle } = styles;
-    const { dataSelected, tickValues } = this.props;
+    const { chartSectionStyle, buttonSectionStyle, mapSectionStyle, dataPointTextStyle } = styles;
+    const { dataSelected, tickValues, dataPointSelected } = this.props;
 
     return (
 
@@ -93,8 +101,8 @@ class WeatherForecast extends Component {
         <View style={ chartSectionStyle }>
           <LineChart
             data={this.getSelectedData(dataSelected)}
-            xKey={"time"}
-            yKey={"value"}
+            xKey={"x"}
+            yKey={"y"}
             width={width(100)}
             height={200}
             title={DATA_TITLES[dataSelected]}
@@ -102,9 +110,26 @@ class WeatherForecast extends Component {
             tickValues={tickValues}
           />
         </View>
-        <View style={{ flex: 0.7 , borderColor: 'red', borderWidth: 4, justifyContent: 'center', marginTop: 10}}>
-          <WeatherItem data={data.list[0]}/>
+
+        <View style={{ flex: 0.7, justifyContent: 'center', marginTop: 15, marginLeft: 10}}>
+          <ItemSelector
+            onPreviousDataPoint={this.onPreviousDataPoint.bind(this)}
+            onNextDataPoint={this.onNextDataPoint.bind(this)}
+            showPrevious={dataPointSelected === 0 ? false : true}
+            showNext={dataPointSelected === data.list.length-1 ? false : true}
+          >
+            <Text style={dataPointTextStyle}>
+              {data.list[dataPointSelected].dt_txt}
+            </Text>
+            <Text style={dataPointTextStyle}>
+              {data.list[dataPointSelected].weather[0].description}
+            </Text>
+            <Text style={dataPointTextStyle}>
+              {data.list[dataPointSelected].wind.speed}
+            </Text>
+          </ItemSelector>
         </View>
+
         <View style={ mapSectionStyle }>
           <MapView
             width={width(96)}
@@ -133,7 +158,6 @@ class WeatherForecast extends Component {
         </View>
 
       </View>
-
     );
   }
 }
@@ -146,7 +170,7 @@ const styles = {
   chartSectionStyle: {
     flex: 1.2,
     padding: 0,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 2,
     alignItems: 'center',
     justifyContent: 'center'
@@ -154,8 +178,8 @@ const styles = {
   buttonSectionStyle: {
     flex: 0.2,
     flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 5
+    marginTop: 15,
+    marginBottom: 15
   },
   mapSectionStyle: {
     flex: 1.5,
@@ -163,16 +187,20 @@ const styles = {
     marginBottom: 2,
     alignItems: 'center',
     justifyContent: 'flex-end'
+  },
+  dataPointTextStyle: {
+    color: 'white'
   }
 }
 
 const mapStateToProps = ({ weatherForecast }) => {
-    const { temperatures, humidities, pressures, lat, lon, tickValues, dataSelected } = weatherForecast;
-    return { temperatures, humidities, pressures, lat, lon, tickValues, dataSelected };
+    const { temperatures, humidities, pressures, lat, lon, tickValues, dataSelected, dataPointSelected } = weatherForecast;
+    return { temperatures, humidities, pressures, lat, lon, tickValues, dataSelected, dataPointSelected };
 };
 
 export default connect(
   mapStateToProps, {
   temperaturesChanged, humiditiesChanged, pressuresChanged,
-  latChanged, lonChanged, tickValuesChanged, dataSelectedChanged }
+  latChanged, lonChanged, tickValuesChanged, dataSelectedChanged,
+  dataPointChanged }
 )(WeatherForecast);

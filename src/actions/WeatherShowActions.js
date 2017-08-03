@@ -5,7 +5,8 @@ import {
   LAT_CHANGED,
   LON_CHANGED,
   TICK_VALUES_CHANGED,
-  DATA_SELECTED_CHANGED
+  DATA_SELECTED_CHANGED,
+  DATA_POINT_CHANGED
 } from './types';
 
 export const temperaturesChanged = (data) => {
@@ -54,5 +55,12 @@ export const dataSelectedChanged = (data) => {
   return {
     type: DATA_SELECTED_CHANGED,
     payload: data
-  }
-}
+  };
+};
+
+export const dataPointChanged = (data) => {
+  return {
+      type: DATA_POINT_CHANGED,
+      payload: data
+  };
+};

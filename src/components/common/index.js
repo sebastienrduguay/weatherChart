@@ -7,4 +7,4 @@ export * from './Spinner';
 export * from './Confirm';
 export * from './SvgExample';
 export * from './LineChart';
-export * from './WeatherItem';
+export * from './ItemSelector';
