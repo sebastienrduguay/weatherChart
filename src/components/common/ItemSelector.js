@@ -7,13 +7,13 @@ const ItemSelector = ({
   return (
     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
       <View style={{ backgroundColor: 'rgba(0,0,0,0)', flex: 0.5 }}>
-        {renderChevron('chevron-left', showPrevious, 30, 'white', onPreviousDataPoint)}
+        {renderChevron('chevron-left', showPrevious, 40, 'white', onPreviousDataPoint)}
       </View>
       <View style={{ backgroundColor: 'rgba(0,0,0,0)', alignItems: 'center', alignContent: 'center', justifyContent: 'center', flex: 3 }}>
         {children}
       </View>
       <View style={{ backgroundColor: 'rgba(0,0,0,0)', flex: 0.5 }}>
-        {renderChevron('chevron-right', showNext, 30, 'white', onNextDataPoint)}
+        {renderChevron('chevron-right', showNext, 40, 'white', onNextDataPoint)}
       </View>
     </View>
   );

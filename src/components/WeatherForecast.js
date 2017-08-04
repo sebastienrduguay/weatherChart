@@ -13,6 +13,7 @@ import {
   dataSelectedChanged,
   dataPointChanged
 } from '../actions/WeatherShowActions';
+import { WeatherItem } from './WeatherItem'
 import { Card, CardSection, Button, ItemSelector, LineChart } from './common';
 
 
@@ -111,22 +112,14 @@ class WeatherForecast extends Component {
           />
         </View>
 
-        <View style={{ flex: 0.7, justifyContent: 'center', marginTop: 15, marginLeft: 10}}>
+        <View style={{ flex: 0.8, justifyContent: 'center', marginTop: 15, marginLeft: 10}}>
           <ItemSelector
             onPreviousDataPoint={this.onPreviousDataPoint.bind(this)}
             onNextDataPoint={this.onNextDataPoint.bind(this)}
             showPrevious={dataPointSelected === 0 ? false : true}
             showNext={dataPointSelected === data.list.length-1 ? false : true}
           >
-            <Text style={dataPointTextStyle}>
-              {data.list[dataPointSelected].dt_txt}
-            </Text>
-            <Text style={dataPointTextStyle}>
-              {data.list[dataPointSelected].weather[0].description}
-            </Text>
-            <Text style={dataPointTextStyle}>
-              {data.list[dataPointSelected].wind.speed}
-            </Text>
+            <WeatherItem data={data.list[dataPointSelected]} />
           </ItemSelector>
         </View>
 
@@ -142,6 +135,7 @@ class WeatherForecast extends Component {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
+            style={{ borderWidth: 1, borderColor: 'white'}}
           />
         </View>
 
@@ -176,9 +170,9 @@ const styles = {
     justifyContent: 'center'
   },
   buttonSectionStyle: {
-    flex: 0.2,
+    flex: 0.3,
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 15
   },
   mapSectionStyle: {
@@ -187,9 +181,6 @@ const styles = {
     marginBottom: 2,
     alignItems: 'center',
     justifyContent: 'flex-end'
-  },
-  dataPointTextStyle: {
-    color: 'white'
   }
 }
 
