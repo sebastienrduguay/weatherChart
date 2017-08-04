@@ -12,6 +12,7 @@ class ControlPanel extends Component {
       case CONTROL_PANEL_LABELS[1]:
       break;
       case CONTROL_PANEL_LABELS[2]:
+  
         Actions.weatherSearch();
       break;
       case CONTROL_PANEL_LABELS[3]:
@@ -26,26 +27,25 @@ class ControlPanel extends Component {
       return;
     }
   }
-  
-  renderControlPanelItems() {
 
+  renderControlPanelItems() {
+    const { controlPanelItemStyle } = styles;
+    return CONTROL_PANEL_LABELS.map((value, i) => {
+      return (
+        <TouchableOpacity key={i} onPress={() => {this.onControlPanelSelection(value)}}>
+          <View style={controlPanelItemStyle}>
+            <Text>{value}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+    });
   }
 
   render() {
-    const { controlPanelItemStyle, controlPanelContainerStyle } = styles;
+    const { controlPanelContainerStyle } = styles;
     return (
       <View style={controlPanelContainerStyle}>
-      {
-        CONTROL_PANEL_LABELS.map((value, i) => {
-          return (
-            <TouchableOpacity onPress={this.onControlPanelSelection(value)}>
-              <View key={i} style={controlPanelItemStyle}>
-                <Text>{value}</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })
-      }
+      { this.renderControlPanelItems() }
       </View>
     );
   }
@@ -56,11 +56,11 @@ const styles = {
     justifyContent: 'center',
     height: 30,
     borderBottomWidth: 2,
-    borderBottomColor: 'red'
+    borderBottomColor: '#068785'
   },
   controlPanelContainerStyle: {
     borderTopWidth: 2,
-    borderTopColor: 'red',
+    borderTopColor: '#068785',
     marginTop: 30
   }
 }

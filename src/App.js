@@ -9,23 +9,30 @@ import { View, Text } from 'react-native';
 import ControlPanel from './components/ControlPanel';
 
 class App extends Component {
+  closeControlPanel = () => {
+
+  };
+  openControlPanel = () => {
+
+  };
+
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
     return (
       <Provider store={store}>
         <Drawer
-          type="overlay"
-          open={true}
           ref={(ref) => this._drawer = ref}
+          type="overlay"
+          disabled={false}
+          captureGestures={true}
           content={<ControlPanel/>}
           tapToClose={true}
-          openDrawerOffset={0.2} // 20% gap on the right side of drawer
+          openDrawerOffset={0.5} // 20% gap on the right side of drawer
           panCloseMask={0.2}
+          panOpenMask={0.5}
           closedDrawerOffset={-3}
           styles={drawerStyles}
-          tweenHandler={(ratio) => ({
-           main: { opacity:(2-ratio)/2 }
-          })}
         >
         <Router />
         </Drawer>
