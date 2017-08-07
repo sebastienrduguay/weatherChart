@@ -1,0 +1,24 @@
+dependencies: \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Modules/RCTExceptionsManager.m \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Modules/RCTExceptionsManager.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/facilite/workspace/weatherChart/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/facilite/workspace/weatherChart/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/facilite/workspace/weatherChart/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Modules/RCTRedBox.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTErrorCustomizer.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/React/Base/RCTRootView.h

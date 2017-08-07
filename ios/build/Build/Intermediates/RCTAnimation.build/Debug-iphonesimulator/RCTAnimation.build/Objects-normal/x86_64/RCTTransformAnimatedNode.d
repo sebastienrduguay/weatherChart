@@ -1,0 +1,5 @@
+dependencies: \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.m \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTAnimatedNode.h \
+  /Users/facilite/workspace/weatherChart/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTValueAnimatedNode.h
